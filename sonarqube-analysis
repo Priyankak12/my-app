@@ -10,6 +10,7 @@ node{
    }
    
    stage('SonarQube Analysis') {
+          sh label: '', script: 'mvn package'
        // def mvnHome =  tool name: 'maven-3.6.0', type: 'maven'
         withSonarQubeEnv('sonar-6') { 
           sh "${mvnHome}/bin/mvn sonar:sonar"
