@@ -6,17 +6,13 @@ node{
       // Get maven home path
         sh label: '', script: 'mvn package'
    }
-   stage('SonarQube Analysis') {
-          withSonarQubeEnv(credentialsId: '4a26425a316964c863f8dc2520996b6627d9e925', installationName: 'sonar-6') { // You can override the credential to be used
-      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
-          //sh label: '', script: 'mvn package'
-          // sonar.analysis.mode=publish
-          // def mvnHome =  tool name: 'maven-3.6.0', type: 'maven'
-          //withSonarQubeEnv('sonar-6') { 
-          //sh "${mvnHome}/bin/mvn sonar:sonar"
-   
-        }
-    }
+    stage('SonarQube Analysis') {
+    withSonarQubeEnv('sonar-6') {
+      sh 'mvn clean package sonar:sonar'
+       //sh "${mvnHome}/bin/mvn sonar:sonar"
+    } // submitted SonarQube taskId is automatically attached to the pipeline context
+  }
+}
    
    stage('Email Notification'){
       mail bcc: '', body: '''Hi Welcome to jenkins email alerts
