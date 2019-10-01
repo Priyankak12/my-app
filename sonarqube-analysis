@@ -12,9 +12,7 @@ node{
        //sh "${mvnHome}/bin/mvn sonar:sonar"
     } // submitted SonarQube taskId is automatically attached to the pipeline context
   }
-}
-   
-   stage('Email Notification'){
+    stage('Email Notification'){
       mail bcc: '', body: '''Hi Welcome to jenkins email alerts
       Thanks
       Hari''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'hari.kammana@gmail.com'
