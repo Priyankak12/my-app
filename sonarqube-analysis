@@ -7,6 +7,7 @@ node{
         sh label: '', script: 'mvn package'
    }
     stage('SonarQube Analysis')  {
+    withSonarQubeEnv('My SonarQube Server') {
       sh 'mvn clean package sonar:sonar'
        //sh "${mvnHome}/bin/mvn sonar:sonar"
     } // submitted SonarQube taskId is automatically attached to the pipeline context
